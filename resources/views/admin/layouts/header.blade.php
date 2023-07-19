@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="dropdown-item bg-transparent text-wrap">
-                                <a href="{{ route('admin.dashboard') }} class="btn btn-soft-secondary btn-sm rounded-pill">how to setup <i class="mdi mdi-magnify ms-1"></i></a>
+                                <a href="{{ route('admin.dashboard') }}" class="btn btn-soft-secondary btn-sm rounded-pill">how to setup <i class="mdi mdi-magnify ms-1"></i></a>
                                 <a href="{{ route('admin.dashboard') }}" class="btn btn-soft-secondary btn-sm rounded-pill">buttons <i class="mdi mdi-magnify ms-1"></i></a>
                             </div>
                             <!-- item-->
@@ -698,7 +698,20 @@
                         <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$5971.67</b></span></a>
                         <a class="dropdown-item" href="pages-profile-settings.html"><span class="badge bg-success-subtle text-success mt-1 float-end">New</span><i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Settings</span></a>
                         <a class="dropdown-item" href="auth-lockscreen-basic.html"><i class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span class="align-middle">Lock screen</span></a>
-                        <a class="dropdown-item" href="auth-logout-basic.html"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Logout</span></a>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}"
+                              onclick="event.preventDefault();
+                               this.closest('form').submit();">
+                            @csrf
+                            <a class="dropdown-item" href="{{ route('logout') }}">
+                                <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
+                                <span class="align-middle" data-key="t-logout">
+                                    {{ __('Log Out') }}
+                                </span>
+                            </a>
+                        </form>
+
                     </div>
                 </div>
             </div>
