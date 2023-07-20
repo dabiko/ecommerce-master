@@ -4,6 +4,8 @@
 <!-- App favicon -->
 <link rel="shortcut icon" href="{{asset('backend/assets/images/favicon.ico')}}">
 
+<!-- swiper css -->
+<link rel="stylesheet" href="{{asset('backend/assets/libs/swiper/swiper-bundle.min.css')}}">
 <!-- Layout config Js -->
 <script src="{{asset('backend/assets/js/layout.js')}}"></script>
 <!-- Bootstrap Css -->

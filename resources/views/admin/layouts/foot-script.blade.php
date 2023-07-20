@@ -12,5 +12,11 @@
 <!-- Dashboard init -->
 <script src="{{asset('backend/assets/js/pages/dashboard-crm.init.js')}}"></script>
 
+<!-- swiper js -->
+<script src="{{asset('backend/assets/libs/swiper/swiper-bundle.min.js')}}"></script>
+
+<!-- profile init js -->
+<script src="{{asset('backend/assets/js/pages/profile.init.js')}}"></script>
+
 <!-- App js -->
 <script src="{{asset('backend/assets/js/app.js')}}"></script>

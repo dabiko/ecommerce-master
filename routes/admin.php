@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+Route::get('profile-setting', [ProfileController::class, 'setting'])->name('profile-setting');
+Route::get('update-profile', [ProfileController::class, 'update'])->name('update-profile');
 
 

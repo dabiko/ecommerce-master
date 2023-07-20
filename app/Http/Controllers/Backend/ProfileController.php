@@ -3,12 +3,23 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    public function login(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function profile(): View
     {
-        return view('admin.profile.index');
+        $user = DB::table('users')->where('id', '=', Auth::user()->id)->get();
+        return view('admin.profile.index', ['user' => $user] );
+    }
+    public function setting(): View
+    {
+        return view('admin.profile.profile-setting');
+    }
+    public function update(): View
+    {
+        return view('admin.profile.profile-update');
     }
 }
