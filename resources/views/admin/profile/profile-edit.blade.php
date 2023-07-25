@@ -26,10 +26,10 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <div class="profile-user position-relative d-inline-block mx-auto  mb-4">
-                                    <img src="{{asset('backend/assets/images/users/avatar-1.jpg')}}" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">
+                                    <img src="{{asset(Auth::user()->image)}}" class="rounded-circle avatar-xl img-thumbnail user-profile-image" alt="user-profile-image">
                                     <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
-                                        <input id="profile-img-file-input" type="file" class="profile-img-file-input">
-                                        <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                        <input name="profile-image" id="profile-image" type="file" class="profile-img-file-input">
+                                        <label for="profile-image" class="profile-photo-edit avatar-xs">
                                                     <span class="avatar-title rounded-circle bg-light text-body">
                                                         <i class="ri-camera-fill"></i>
                                                     </span>
@@ -135,38 +135,47 @@
                         <div class="card-body p-4">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                                    <form action="javascript:void(0);">
+                                    <form  method="post"
+                                           action="{{route('admin.profile-update')}}"
+                                           enctype="multipart/form-data">
+                                        @method('POST')
+                                        @csrf
+
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
-                                                    <label for="firstnameInput" class="form-label">Name</label>
-                                                    <input type="text" class="form-control" id="firstnameInput" placeholder="Enter your firstname" value="{{ Auth::user()->name }}">
+                                                    <label for="name" class="form-label">Name</label>
+                                                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter your name" value="{{ Auth::user()->name }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
-                                                    <label for="lastnameInput" class="form-label">Username</label>
-                                                    <input type="text" class="form-control" id="lastnameInput" placeholder="Enter your lastname" value="{{ Auth::user()->username }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="mb-3">
-                                                    <label for="roleInput" class="form-label">Roles</label>
-                                                    <input disabled="disabled" type="text" class="form-control" id="roleInput" placeholder="Enter your phone number" value="{{ Auth::user()->role }}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="mb-3">
-                                                    <label for="emailInput" class="form-label">Email Address</label>
-                                                    <input type="email" class="form-control" id="emailInput" placeholder="Enter your email" value="{{ Auth::user()->email }}">
+                                                    <label for="username" class="form-label">Username</label>
+                                                    <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username" value="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
+
                                                 <div class="mb-3">
-                                                    <label for="dateInput" class="form-label">Joining Date</label>
-                                                    <input type="text" class="form-control" data-provider="flatpickr" id="dateInput" data-date-format="d M, Y" data-deafult-date="24 Nov, 2021" placeholder="Select date" />
+                                                    <label for="image" class=" profile-photo-edit">Profile Image</label>
+                                                    <input type="file" name="image" class="form-control" id="image" placeholder="Enter your username" value="">
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="role" class="form-label">Roles</label>
+                                                    <input disabled="disabled" type="text" name="role" class="form-control" id="role" placeholder="Enter your phone number" value="{{ Auth::user()->role }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="email" class="form-label">Email Address</label>
+                                                    <input disabled="disabled" type="email" name="email" class="form-control" id="email" placeholder="Enter your email" value="{{ Auth::user()->email }}">
+                                                </div>
+                                            </div>
+
+                                            </div>
+                                        <div class="col-lg-12">
                                             <div class="col-lg-12">
                                                 <div class="hstack gap-2 justify-content-end">
                                                     <button type="submit" class="btn btn-primary">Updates</button>
@@ -177,24 +186,47 @@
                                     </form>
                                 </div>
                                 <div class="tab-pane" id="changePassword" role="tabpanel">
-                                    <form action="javascript:void(0);">
+                                    <script>
+                                        Swal.fire({
+                                            title: 'Success',
+                                            text: response.data.message, // Assuming the response contains the notification message
+                                            icon: 'success',
+                                            timer: 3000, // Duration to display the notification (in milliseconds)
+                                        });
+                                    </script>
+                                    @if($errors->any())
+                                        @foreach($errors->all() as $error)
+                                            <div class="alert alert-danger">{{ $error }}</div>
+                                        @endforeach
+                                    @endif
+                                    <form  method="post"
+                                           action="{{route('admin.password-update')}}" >
+                                        @method('POST')
+                                        @csrf
+
                                         <div class="row g-2">
                                             <div class="col-lg-4">
                                                 <div>
-                                                    <label for="oldpasswordInput" class="form-label">Old Password*</label>
-                                                    <input type="password" class="form-control" id="oldpasswordInput" placeholder="Enter current password">
+                                                    <label for="current_password" class="form-label">Old Password*</label>
+                                                    <input
+                                                        type="password"
+                                                        class="form-control"
+                                                        name="current_password"
+                                                        id="current_password"
+                                                        placeholder="Enter current password"
+                                                    >
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div>
-                                                    <label for="newpasswordInput" class="form-label">New Password*</label>
-                                                    <input type="password" class="form-control" id="newpasswordInput" placeholder="Enter new password">
+                                                    <label for="password" class="form-label">New Password*</label>
+                                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter new password">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div>
-                                                    <label for="confirmpasswordInput" class="form-label">Confirm Password*</label>
-                                                    <input type="password" class="form-control" id="confirmpasswordInput" placeholder="Confirm password">
+                                                    <label for="password_confirmation" class="form-label">Confirm Password*</label>
+                                                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Confirm password">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
@@ -204,7 +236,7 @@
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="text-end">
-                                                    <button type="submit" class="btn btn-success">Change Password</button>
+                                                    <button type="submit" class="btn btn-success">Update Password</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -495,5 +527,4 @@
             </div>
         </div>
     </div>
-
 @endsection

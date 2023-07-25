@@ -79,7 +79,7 @@
                                     </li>
                                 </ul>
                                 <div class="flex-shrink-0">
-                                    <a href="{{ route('admin.update-profile') }}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
+                                    <a href="{{ route('admin.profile-edit') }}" class="btn btn-success"><i class="ri-edit-box-line align-bottom"></i> Edit Profile</a>
                                 </div>
                             </div>
                             <!-- Tab panes -->
