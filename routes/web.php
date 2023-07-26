@@ -21,7 +21,7 @@ Route::get('/', [ HomeController::class, 'home'])->name('home-page');
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('frontend.dashboard.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
