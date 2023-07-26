@@ -1,47 +1,44 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('frontend.layouts.master')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('content')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    {{-- Bread crumb section --}}
+    <section id="wsus__breadcrumb">
+        <div class="wsus_breadcrumb_overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h4>login - register</h4>
+                        <ul>
+                            <li><a href="{{ route('home-page') }}">home</a></li>
+                            <li>
+                                <a href="javascript:void(0)">login  </a>
+                                <a href="javascript:void(0)"> - </a>
+                                <a href="{{ route('register') }}"> register</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+    {{-- Login section --}}
+    <section id="wsus__login_register">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 m-auto">
+                    <div class="wsus__login_reg_area">
+                        <h4>logo</h4>
+                        <div class="tab-content" id="pills-tabContent2">
+                            <div class="tab-pane fade show active" id="pills-homes" role="tabpanel"
+                                 aria-labelledby="pills-home-tab2">
+                                 @include('auth.sections.user-login')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </section>
+@endsection
